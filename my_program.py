@@ -177,3 +177,5 @@ threading.Thread(target=run).start()
 
 # Запускаємо самого бота (це НАЙОСТАННІШИЙ рядок програми)
 bot.polling(none_stop=True)
+threading.Thread(target=run).start()
+bot.infinity_polling()
