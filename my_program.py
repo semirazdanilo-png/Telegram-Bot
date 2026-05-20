@@ -157,10 +157,6 @@ def handle_button_click(call):
     bot.send_message(chat_id, weather_report)
     bot.answer_callback_query(call.id)
 
-if __name__ == '__main__':
-    print("Бот Данила успішно запущений!")
-    bot.infinity_polling()
-
 import os
 from flask import Flask
 import threading
