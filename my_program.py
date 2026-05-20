@@ -176,8 +176,8 @@ def run():
     port = int(os.environ.get("PORT", 8080))
     app.run(host='0.0.0.0', port=port)
 
-# Запускаємо веб-сервер у лівому потоці
+# Запускаємо веб-сервер у фоновому потоці
 threading.Thread(target=run).start()
 
-# Твій запуск бота, який вже є в коді:
+# Останній рядок твого файлу:
 bot.polling(none_stop=True)
