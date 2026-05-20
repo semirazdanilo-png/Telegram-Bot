@@ -161,21 +161,23 @@ if __name__ == '__main__':
     print("Бот Данила успішно запущений!")
     bot.infinity_polling()
 
-import http.server
-import socketserver
-import threading
 import os
+from flask import Flask
+import threading
 
-def run_fake_server():
-    class MyHandler(http.server.SimpleHTTPRequestHandler):
-        def do_GET(self):
-            self.send_response(200)
-            self.send_header("Content-type", "text/plain")
-            self.end_headers()
-            self.wfile.write(b"Bot is running!")
+app = Flask('')
 
+@app.route('/')
+def home():
+    return "Бот працює!"
+
+def run():
+    # Render сам дає порт у змінну оточення 'PORT'. Якщо її немає, беремо 8080
     port = int(os.environ.get("PORT", 8080))
-    with socketserver.TCPServer(("", port), MyHandler) as httpd:
-        httpd.serve_forever()
+    app.run(host='0.0.0.0', port=port)
 
-threading.Thread(target=run_fake_server, daemon=True).start()
+# Запускаємо веб-сервер у лівому потоці
+threading.Thread(target=run).start()
+
+# Твій запуск бота, який вже є в коді:
+bot.polling(none_stop=True)
