@@ -158,24 +158,22 @@ def handle_button_click(call):
     bot.answer_callback_query(call.id)
 
 import os
-from flask import Flask
 import threading
+from flask import Flask
 
 app = Flask('')
 
-@app.route('/')
+
+@app.route("/")
 def home():
     return "Бот працює!"
 
+
 def run():
-    # Цей рядок автоматично візьме порт, який вимагає Render
     port = int(os.environ.get("PORT", 8080))
-    app.run(host='0.0.0.0', port=port)
+    app.run(host="0.0.0.0", port=port)
 
-# Запускаємо веб-сервер обманки у фоновому потоці
-threading.Thread(target=run).start()
 
-# Запускаємо самого бота (це НАЙОСТАННІШИЙ рядок програми)
-bot.polling(none_stop=True)
+# ЗАПУСК
 threading.Thread(target=run).start()
 bot.infinity_polling()
