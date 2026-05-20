@@ -176,30 +176,8 @@ def run():
     port = int(os.environ.get("PORT", 8080))
     app.run(host='0.0.0.0', port=port)
 
-# Спочатку запускаємо веб-сервер (обманку)
-threading.Thread(target=run).start()
-
-# Це ОСТАННІЙ рядок файлу. Твій бот запускається після сервера:
-bot.polling(none_stop=True)
-# ==========================================
-# ОЦЕ ВСТАВЛЯЙ В САМИЙ КІНЕЦЬ ФАЙЛУ:
-
-import os
-from flask import Flask
-import threading
-
-app = Flask('')
-
-@app.route('/')
-def home():
-    return "Бот працює!"
-
-def run():
-    port = int(os.environ.get("PORT", 8080))
-    app.run(host='0.0.0.0', port=port)
-
 # Запускаємо веб-сервер обманки у фоновому потоці
 threading.Thread(target=run).start()
 
-# Запускаємо опитування Телеграма (це останній рядок програми)
+# Запускаємо самого бота (це НАЙОСТАННІШИЙ рядок програми)
 bot.polling(none_stop=True)
