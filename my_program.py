@@ -170,6 +170,6 @@ def run():
     app.run(host="0.0.0.0", port=port, use_reloader=False)
 
 # ЗАПУСК (Тепер під захистом умови __main__)
-if name == '__main__':
-    threading.Thread(target=run).start()
-    bot.infinity_polling(skip_pending=True)
+# ЗАПУСК
+threading.Thread(target=run).start()
+bot.infinity_polling(skip_pending=True)
