@@ -29,14 +29,14 @@ def get_weather_data():
     """Максимально спрощений запит погоди без зайвих параметрів та з вимкненим SSL"""
     base_url = "https://api.open-meteo.com/v1/forecast"
     
-    params = {
+   params = {
         "latitude": "49.8383",
         "longitude": "24.0232",
-        "hourly": "temperature_2m,weathercode",
+        "hourly": ["temperature_2m", "weathercode"],
         "timezone": "Europe/Kyiv"
     }
-    
-    full_url = f"{base_url}?{urllib.parse.urlencode(params)}"
+
+    full_url = f"{base_url}?{urllib.parse.urlencode(params, doseq=True)}"
     
     try:
         context = ssl._create_unverified_context()
