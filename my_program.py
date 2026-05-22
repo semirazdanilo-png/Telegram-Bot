@@ -173,6 +173,5 @@ def run():
 
 
 # ЗАПУСК
-if name == '__main__':
-    threading.Thread(target=run).start()
-    bot.infinity_polling(skip_pending=True)
+threading.Thread(target=run).start()
+bot.infinity_polling(skip_pending=True)
