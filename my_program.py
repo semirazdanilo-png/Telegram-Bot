@@ -7,7 +7,7 @@ from datetime import datetime
 from telebot import types
 
 # Твій токен Telegram
-TOKEN = '8677157299:AAEpOF5hE9tZo5BWyc_8xVFX2yIqJvwocPE'
+TOKEN = '8677157299:AAF0NGNEcddtbL8fre44-Rxccce7Wl8cuCE'
 bot = telebot.TeleBot(TOKEN)
 
 # Назви місяців для кнопок
