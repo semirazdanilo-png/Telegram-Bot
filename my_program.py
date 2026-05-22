@@ -29,25 +29,25 @@ def get_weather_data():
     """Максимально спрощений запит погоди без зайвих параметрів та з вимкненим SSL"""
     base_url = "https://api.open-meteo.com/v1/forecast"
     
-        params = {
-        "latitude": "49.8383",
-        "longitude": "24.0232",
-        "hourly": ["temperature_2m", "weathercode"],
-        "timezone": "Europe/Kyiv"
+    params = {
+           "latitude": "49.8383",
+            "longitude": "24.0232",
+            "hourly": ["temperature_2m", "weathercode"],
+            "timezone": "Europe/Kyiv"
     }
 
-        full_url = f"{base_url}?{urllib.parse.urlencode(params, doseq=True)}"
+     full_url = f"{base_url}?{urllib.parse.urlencode(params, doseq=True)}"
     
-        try:
-        context = ssl._create_unverified_context()
-        req = urllib.request.Request(full_url, headers={'User-Agent': 'Mozilla/5.0'})
-        with urllib.request.urlopen(req, context=context, timeout=10) as response:
-            if response.status == 200:
-                html = response.read().decode('utf-8')
-                return json.loads(html)
-    except Exception as e:
-        print("Помилка отримання погоди:", e)
-    return None
+     try:
+            context = ssl._create_unverified_context()
+            req = urllib.request.Request(full_url, headers={'User-Agent': 'Mozilla/5.0'})
+            with urllib.request.urlopen(req, context=context, timeout=10) as response:
+                if response.status == 200:
+                    html = response.read().decode('utf-8')
+                    return json.loads(html)
+        except Exception as e:
+            print("Помилка отримання погоди:", e)
+        return None
 
 @bot.message_handler(commands=['start', 'weather'])
 def send_welcome(message):
