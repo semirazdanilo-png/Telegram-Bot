@@ -5,6 +5,9 @@ import json
 import ssl
 from datetime import datetime
 from telebot import types
+import os
+import threading
+from flask import Flask
 
 # Твій токен Telegram
 TOKEN = '8677157299:AAF0NGNEcddtbL8fre44-Rxccce7Wl8cuCE'
@@ -47,6 +50,7 @@ def get_weather_data():
     except Exception as e:
         print("Помилка отримання погоди:", e)
     return None
+
 @bot.message_handler(commands=['start', 'weather'])
 def send_welcome(message):
     chat_id = message.chat.id
@@ -155,23 +159,17 @@ def handle_button_click(call):
     bot.send_message(chat_id, weather_report)
     bot.answer_callback_query(call.id)
 
-import os
-import threading
-from flask import Flask
-
 app = Flask('')
-
 
 @app.route("/")
 def home():
     return "Бот працює!"
 
-
 def run():
     port = int(os.environ.get("PORT", 8080))
     app.run(host="0.0.0.0", port=port, use_reloader=False)
 
-
-# ЗАПУСК
-threading.Thread(target=run).start()
-bot.infinity_polling(skip_pending=True)
+# ЗАПУСК (Тепер під захистом умови __main__)
+if name == '__main__':
+    threading.Thread(target=run).start()
+    bot.infinity_polling(skip_pending=True)
